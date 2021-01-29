@@ -19,7 +19,6 @@ class ButtonWithTextWidget extends StatelessWidget {
               color: Color.fromRGBO(233, 250, 206, 1), borderRadius: BorderRadius.circular(30)),
         ),
         new Container(
-          margin: const EdgeInsets.only(top: 12.0, bottom: 32.0),
           child: new Text(
             label,
             textAlign: TextAlign.center,

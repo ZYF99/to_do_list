@@ -2,6 +2,12 @@ import 'package:to_do_list/model/RecordModel.dart';
 
 class DayRecordModel {
 
+  //日期的“年”
+  int yearValue;
+
+  //日期的“月”
+  int monthValue;
+
   //日期的“日”
   int dayValue;
 
@@ -12,5 +18,5 @@ class DayRecordModel {
   double get dayProportion =>
       (recordList.where((element) => element.isDone)).length / recordList.length;
 
-  DayRecordModel(this.dayValue,this.recordList);
+  DayRecordModel(this.yearValue,this.monthValue,this.dayValue,this.recordList);
 }

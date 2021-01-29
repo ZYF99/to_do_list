@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:to_do_list/model/YearModel.dart';
+import 'package:to_do_list/page/calendar/CalendarPage.dart';
+import 'package:to_do_list/page/month_calendar/MonthCalendarPage.dart';
 import 'MonthItem.dart';
 
 class YearItem extends StatelessWidget {
@@ -21,8 +23,8 @@ class YearItem extends StatelessWidget {
 
   Widget buildTitle(YearModel yearModel) {
     return Container(
-      margin: const EdgeInsets.only(left: 6),
-      alignment: AlignmentDirectional.centerStart,
+        margin: const EdgeInsets.only(left: 6),
+        alignment: AlignmentDirectional.centerStart,
         child: Text(yearModel.yearValue.toString(),
             style: TextStyle(
               fontSize: 32,
@@ -35,7 +37,14 @@ class YearItem extends StatelessWidget {
   Widget buildMonthList(YearModel yearModel) {
     return GridView.builder(
         itemBuilder: (context, index) {
-          return MonthItem(yearModel.monthList[index]);
+          return GestureDetector(
+            child: MonthItem(yearModel.monthList[index]),
+            onTap: () => {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return CalendarPage(title:"Calendar");
+              }))
+            },
+          );
         },
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
         shrinkWrap: true,

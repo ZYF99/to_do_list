@@ -11,6 +11,8 @@ class MyPainter extends CustomPainter {
     double eWidth = squareWidth.toDouble();
     double eHeight = squareWidth.toDouble();
 
+    print(size.width);
+    print(size.height);
     //行数
     int lines = size.height ~/ squareWidth;
 

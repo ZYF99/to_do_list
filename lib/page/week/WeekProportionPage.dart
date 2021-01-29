@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:to_do_list/model/WeekProportionModel.dart';
 import 'package:to_do_list/page/week/WeekProportionItem.dart';
-import 'package:to_do_list/widget/SquareScaffold.dart';
 
 class WeekProportionPage extends StatefulWidget {
   @override
@@ -17,25 +16,25 @@ class WeekProportionState extends State<WeekProportionPage> {
   @override
   Widget build(BuildContext context) {
     getProportionList();
-    return SquareScaffoldUtil.buildSquareScaffold(
-      Container(
-        margin: const EdgeInsets.only(top: 64, left: 32),
-        child: Column(
-          children: [
-            buildTitle(),
-            Expanded(
-                child: ListView.builder(
-              shrinkWrap: true,
-              itemBuilder: (context, index) {
-                return WeekProportionItem(_weekProportionList[index]);
-              },
-              itemCount: _weekProportionList.length,
-            ))
-          ],
-          crossAxisAlignment: CrossAxisAlignment.start,
-        ),
-      ),
-    );
+    return Scaffold(
+        backgroundColor: Colors.transparent,
+        body: Container(
+          margin: const EdgeInsets.only(top: 64, left: 32),
+          child: Column(
+            children: [
+              buildTitle(),
+              Expanded(
+                  child: ListView.builder(
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  return WeekProportionItem(_weekProportionList[index]);
+                },
+                itemCount: _weekProportionList.length,
+              ))
+            ],
+            crossAxisAlignment: CrossAxisAlignment.start,
+          ),
+        ));
   }
 
   //获取进度列表
@@ -56,7 +55,7 @@ class WeekProportionState extends State<WeekProportionPage> {
     return Text(
       "Week",
       style: TextStyle(
-        fontSize: 88,
+        fontSize: 64,
         fontFamily: 'orangejuice',
         color: Colors.blueGrey,
         backgroundColor: Colors.transparent,

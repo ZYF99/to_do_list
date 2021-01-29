@@ -21,27 +21,30 @@ class YearCalenderState extends State<YearCalendarPage> {
   @override
   Widget build(BuildContext context) {
     getYearList();
-    return SquareScaffoldUtil.buildSquareScaffold(ListView(
-      children: [
-        Container(
-          margin: const EdgeInsets.only(top: 16,left: 16),
-          child: Text("Calendar",
-              style: TextStyle(
-                fontSize: 64,
-                fontFamily: 'orangejuice',
-                color: Colors.blueGrey,
-                backgroundColor: Colors.transparent,
-              )),
-        ),
-        ListView.builder(
-            itemBuilder: (context, index) {
-              return YearItem(_yearList[index]);
-            },
-            shrinkWrap: true, //解决无限高度问题
-            physics: new NeverScrollableScrollPhysics(),
-            itemCount: _yearList.length)
-      ],
-    ));
+    return Scaffold(
+        backgroundColor: Colors.transparent,
+        body: ListView(
+          children: [
+            Container(
+              margin: const EdgeInsets.only(top: 16, left: 16),
+              child: Text("Calendar",
+                  style: TextStyle(
+                    fontSize: 64,
+                    fontFamily: 'orangejuice',
+                    color: Colors.blueGrey,
+                    backgroundColor: Colors.transparent,
+                  )),
+            ),
+            ListView.builder(
+                itemBuilder: (context, index) {
+                  return YearItem(_yearList[index]);
+                },
+                shrinkWrap: true, //解决无限高度问题
+                physics: new NeverScrollableScrollPhysics(),
+                itemCount: _yearList.length),
+            Container(height: 120)
+          ],
+        ));
   }
 
   getYearList() {
@@ -51,56 +54,22 @@ class YearCalenderState extends State<YearCalendarPage> {
       RecordModel("哈哈哈哈哈哈", DateTime.now().millisecondsSinceEpoch, true)
     ];
 
-    var dayRecordList = [
-      DayRecordModel(1, recordModelList),
-      DayRecordModel(2, recordModelList),
-      DayRecordModel(3, recordModelList),
-      DayRecordModel(4, recordModelList),
-      DayRecordModel(5, recordModelList),
-      DayRecordModel(1, recordModelList),
-      DayRecordModel(2, recordModelList),
-      DayRecordModel(3, recordModelList),
-      DayRecordModel(4, recordModelList),
-      DayRecordModel(5, recordModelList),
-      DayRecordModel(1, recordModelList),
-      DayRecordModel(2, recordModelList),
-      DayRecordModel(3, recordModelList),
-      DayRecordModel(4, recordModelList),
-      DayRecordModel(5, recordModelList),
-      DayRecordModel(1, recordModelList),
-      DayRecordModel(2, recordModelList),
-      DayRecordModel(3, recordModelList),
-      DayRecordModel(4, recordModelList),
-      DayRecordModel(5, recordModelList),
-      DayRecordModel(1, recordModelList),
-      DayRecordModel(2, recordModelList),
-      DayRecordModel(3, recordModelList),
-      DayRecordModel(4, recordModelList),
-      DayRecordModel(5, recordModelList),
-    ];
+    var dayRecordList = List<DayRecordModel>();
+
+    for (int i = 1; i <= 31; i++) {
+      dayRecordList.add(DayRecordModel(2021,1,i, recordModelList));
+    }
 
     var monthList2021 = [
-      MonthModel(1, dayRecordList),
+      MonthModel(2021, 1, dayRecordList),
     ];
 
-    var monthList2020 = [
-      MonthModel(1, dayRecordList),
-      MonthModel(2, dayRecordList),
-      MonthModel(3, dayRecordList),
-      MonthModel(4, dayRecordList),
-      MonthModel(5, dayRecordList),
-      MonthModel(6, dayRecordList),
-      MonthModel(7, dayRecordList),
-      MonthModel(8, dayRecordList),
-      MonthModel(9, dayRecordList),
-      MonthModel(10, dayRecordList),
-      MonthModel(11, dayRecordList),
-      MonthModel(12, dayRecordList)
-    ];
+    var monthList2020 = List<MonthModel>();
 
-    _yearList = [
-      YearModel(2021, monthList2021),
-      YearModel(2020, monthList2020)
-    ];
+    for (int i = 1; i <= 12; i++) {
+      monthList2020.add(MonthModel(2020, i, dayRecordList));
+    }
+
+    _yearList = [YearModel(2021, monthList2021), YearModel(2020, monthList2020)];
   }
 }

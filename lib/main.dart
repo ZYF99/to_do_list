@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:flutter/services.dart';
-import 'package:to_do_list/page/home/Homepage.dart';
+import 'package:to_do_list/page/home/DailyListPage.dart';
+import 'package:to_do_list/page/main/MainPage.dart';
 import 'package:to_do_list/widget/CustomPaintRoute.dart';
 
 void main() => runApp(new MyApp());
@@ -17,6 +18,6 @@ class MyApp extends StatelessWidget {
       SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
     }
 
-    return new MaterialApp(title: 'ToDoList', home: Homepage());
+    return new MaterialApp(title: 'ToDoList', home: MainPage());
   }
 }
