@@ -19,7 +19,7 @@ class WeekProportionState extends State<WeekProportionPage> {
     return Scaffold(
         backgroundColor: Colors.transparent,
         body: Container(
-          margin: const EdgeInsets.only(top: 64, left: 32),
+          margin: const EdgeInsets.only(top: 64, left: 32,bottom: 122),
           child: Column(
             children: [
               buildTitle(),

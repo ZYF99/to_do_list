@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:to_do_list/model/MonthModel.dart';
-import 'package:to_do_list/value/MyColors.dart';
+import 'package:to_do_list/page/month_calendar/DayItem.dart';
+import 'package:to_do_list/utils/DateUtil.dart';
 
 class MonthItem extends StatelessWidget {
   MonthModel _monthModel;
@@ -18,35 +19,31 @@ class MonthItem extends StatelessWidget {
     //这个月的完成率
     var _monthProportion = allDownListInMonth.length / allRecordInMonth.length;
 
-    return Column(
-      children: [
-        Text(
-          _monthModel.monthValue.toString() + "月",
-          textAlign: TextAlign.center,
-          style: TextStyle(fontFamily: "adam_gorry_lights", fontSize: 24),
-        ),
-        Expanded(
-            child: ClipRRect(
-                child: Container(
-                  width: 120,
-                    child: Stack(
-                      children: [
-                        CircularProgressIndicator(
-                          value: _monthProportion,
-                          backgroundColor: MyColors.colorPrimary,
-                        ),
-                        Text(
-                          (_monthProportion * 100).ceil().toString() + "%",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(color: Colors.white),
-                        )
-                      ],
-                      alignment: Alignment.center,
-                    ),
-                    padding: const EdgeInsets.all(12),
-                    decoration: BoxDecoration(color: MyColors.colorAccentHalf)),
-                borderRadius: BorderRadius.circular(10))),
-      ],
-    );
+    return Container(
+        margin: const EdgeInsets.only(left: 8),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              _monthModel.monthValue.toString() + "月",
+              textAlign: TextAlign.start,
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+            ),
+            buildDayList()
+          ],
+        ));
+  }
+
+  Widget buildDayList() {
+    return Container(
+      margin: EdgeInsets.only(top: 8),
+        child: GridView.builder(
+            itemBuilder: (context, index) {
+              return DayItem(_monthModel.dayRecordList[index]);
+            },
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 7),
+            shrinkWrap: true,
+            physics: new NeverScrollableScrollPhysics(),
+            itemCount: DateUtil.getDaysInMonth(_monthModel.yearValue, _monthModel.monthValue)));
   }
 }

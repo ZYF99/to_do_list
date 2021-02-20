@@ -4,8 +4,6 @@ import 'package:to_do_list/model/DayRecordModel.dart';
 import 'package:to_do_list/model/MonthModel.dart';
 import 'package:to_do_list/model/RecordModel.dart';
 import 'package:to_do_list/model/YearModel.dart';
-import 'package:to_do_list/widget/SquareScaffold.dart';
-
 import 'YearItem.dart';
 
 class YearCalendarPage extends StatefulWidget {
@@ -22,28 +20,30 @@ class YearCalenderState extends State<YearCalendarPage> {
   Widget build(BuildContext context) {
     getYearList();
     return Scaffold(
-        backgroundColor: Colors.transparent,
-        body: ListView(
-          children: [
-            Container(
-              margin: const EdgeInsets.only(top: 16, left: 16),
-              child: Text("Calendar",
-                  style: TextStyle(
-                    fontSize: 64,
-                    fontFamily: 'orangejuice',
-                    color: Colors.blueGrey,
-                    backgroundColor: Colors.transparent,
-                  )),
-            ),
-            ListView.builder(
-                itemBuilder: (context, index) {
-                  return YearItem(_yearList[index]);
-                },
-                shrinkWrap: true, //解决无限高度问题
-                physics: new NeverScrollableScrollPhysics(),
-                itemCount: _yearList.length),
-            Container(height: 120)
-          ],
+        backgroundColor: Colors.white,
+        body: Container(
+          child: ListView(
+            children: [
+              Container(
+                margin: const EdgeInsets.only(top: 16, left: 16),
+                child: Text("Calendar",
+                    style: TextStyle(
+                      fontSize: 64,
+                      fontFamily: 'orangejuice',
+                      color: Colors.blueGrey,
+                      backgroundColor: Colors.transparent,
+                    )),
+              ),
+              ListView.builder(
+                  itemBuilder: (context, index) {
+                    return YearItem(_yearList[index]);
+                  },
+                  shrinkWrap: true, //解决无限高度问题
+                  physics: new NeverScrollableScrollPhysics(),
+                  itemCount: _yearList.length),
+            ],
+          ),
+          margin: const EdgeInsets.only(bottom: 122),
         ));
   }
 
@@ -57,12 +57,13 @@ class YearCalenderState extends State<YearCalendarPage> {
     var dayRecordList = List<DayRecordModel>();
 
     for (int i = 1; i <= 31; i++) {
-      dayRecordList.add(DayRecordModel(2021,1,i, recordModelList));
+      dayRecordList.add(DayRecordModel(2021, 1, i, recordModelList));
     }
 
-    var monthList2021 = [
-      MonthModel(2021, 1, dayRecordList),
-    ];
+    var monthList2021 = List<MonthModel>();
+    for (int i = 1; i <= 12; i++) {
+      monthList2021.add(MonthModel(2021, i, dayRecordList));
+    }
 
     var monthList2020 = List<MonthModel>();
 

@@ -13,43 +13,43 @@ class WeekProportionItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        margin: const EdgeInsets.only(bottom: 16),
-        child: Row(
-          children: [
-            Text(
-              _weekProportion.title,
+        margin: const EdgeInsets.only(bottom: 24),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Text(_weekProportion.title,
               style: TextStyle(
-                fontSize: 48,
+                fontSize: 28,
                 fontFamily: 'orangejuice',
                 color: Colors.blueGrey,
                 backgroundColor: Colors.transparent,
-              ),
-            ),
-            Expanded(
-                child: Container(
-              margin: const EdgeInsets.only(left: 16, right: 16),
-              child: ClipRRect(
-                borderRadius: new BorderRadius.all(const Radius.circular(10.0)),
-                child: LinearProgressIndicator(
-                  minHeight: 32,
-                  backgroundColor: MyColors.colorPrimary,
-                  valueColor: AlwaysStoppedAnimation(MyColors.colorAccent),
-                  value: _weekProportion.proportion,
-                ),
-              ),
-            )),
-            Container(
-                margin: const EdgeInsets.only(right: 32),
-                child: Text(
-                  (_weekProportion.proportion * 100).ceil().toString() + "%",
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontFamily: 'orangejuice',
-                    color: Colors.blueGrey,
-                    backgroundColor: Colors.transparent,
+              )),
+          Row(
+            children: [
+              Expanded(
+                  child: Container(
+                margin: const EdgeInsets.only(right: 16),
+                child: ClipRRect(
+                  borderRadius: new BorderRadius.all(const Radius.circular(10.0)),
+                  child: LinearProgressIndicator(
+                    minHeight: 32,
+                    backgroundColor: MyColors.colorPrimary,
+                    valueColor: AlwaysStoppedAnimation(MyColors.colorAccent),
+                    value: _weekProportion.proportion,
                   ),
-                ))
-          ],
-        ));
+                ),
+              )),
+              Container(
+                  margin: const EdgeInsets.only(right: 32),
+                  child: Text(
+                    (_weekProportion.proportion * 100).ceil().toString() + "%",
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontFamily: 'orangejuice',
+                      color: Colors.blueGrey,
+                      backgroundColor: Colors.transparent,
+                    ),
+                  ))
+            ],
+          )
+        ]));
   }
 }

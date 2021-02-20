@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:to_do_list/model/MonthModel.dart';
 import 'package:to_do_list/widget/SquareScaffold.dart';
-
 import 'DayItem.dart';
 
 class MonthCalendarPage extends StatefulWidget {
