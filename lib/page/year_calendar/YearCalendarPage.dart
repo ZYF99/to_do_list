@@ -4,6 +4,7 @@ import 'package:to_do_list/model/DayRecordModel.dart';
 import 'package:to_do_list/model/MonthModel.dart';
 import 'package:to_do_list/model/RecordModel.dart';
 import 'package:to_do_list/model/YearModel.dart';
+import 'package:to_do_list/utils/DateUtil.dart';
 import 'YearItem.dart';
 
 class YearCalendarPage extends StatefulWidget {
@@ -14,11 +15,11 @@ class YearCalendarPage extends StatefulWidget {
 }
 
 class YearCalenderState extends State<YearCalendarPage> {
-  List<YearModel> _yearList;
+  static List<YearModel> yearList;
 
   @override
   Widget build(BuildContext context) {
-    getYearList();
+    getGlobalDataList();
     return Scaffold(
         backgroundColor: Colors.white,
         body: Container(
@@ -36,41 +37,37 @@ class YearCalenderState extends State<YearCalendarPage> {
               ),
               ListView.builder(
                   itemBuilder: (context, index) {
-                    return YearItem(_yearList[index]);
+                    return YearItem(yearList[index]);
                   },
                   shrinkWrap: true, //解决无限高度问题
                   physics: new NeverScrollableScrollPhysics(),
-                  itemCount: _yearList.length),
+                  itemCount: yearList.length),
             ],
           ),
           margin: const EdgeInsets.only(bottom: 122),
         ));
   }
 
-  getYearList() {
-    var recordModelList = [
-      RecordModel("哈哈哈哈哈哈", DateTime.now().millisecondsSinceEpoch, true),
-      RecordModel("哈哈哈哈哈哈", DateTime.now().millisecondsSinceEpoch, false),
-      RecordModel("哈哈哈哈哈哈", DateTime.now().millisecondsSinceEpoch, true)
-    ];
-
-    var dayRecordList = List<DayRecordModel>();
-
-    for (int i = 1; i <= 31; i++) {
-      dayRecordList.add(DayRecordModel(2021, 1, i, recordModelList));
-    }
-
-    var monthList2021 = List<MonthModel>();
+  //获取所有记录数据
+  getGlobalDataList() {
+    var monthList = List<MonthModel>();
     for (int i = 1; i <= 12; i++) {
-      monthList2021.add(MonthModel(2021, i, dayRecordList));
+      var dayRecordListInMonth = List<DayRecordModel>();
+      for (int j = 1; j <= DateUtil.getDaysInMonth(2021, i); j++) {
+        var recordModelList = [
+          RecordModel("2021年${i}月${j}日万事大吉！！！！！！！！！！！", DateTime(2021, i, j).millisecond, true),
+          RecordModel("哈哈哈哈哈哈", DateTime(2021, i, j).millisecond, false),
+          RecordModel("哈哈哈哈哈哈", DateTime(2021, i, j).millisecond, true)
+        ];
+        dayRecordListInMonth.add(DayRecordModel(2021, i, j, recordModelList));
+      }
+      monthList.add(MonthModel(2021, i, dayRecordListInMonth));
     }
+    yearList = [YearModel(2021, monthList)];
+  }
 
-    var monthList2020 = List<MonthModel>();
-
-    for (int i = 1; i <= 12; i++) {
-      monthList2020.add(MonthModel(2020, i, dayRecordList));
-    }
-
-    _yearList = [YearModel(2021, monthList2021), YearModel(2020, monthList2020)];
+  //抛给全局使用的
+  static List<YearModel> getYearListGlobal() {
+    return yearList;
   }
 }

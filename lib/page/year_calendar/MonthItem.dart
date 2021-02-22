@@ -16,9 +16,6 @@ class MonthItem extends StatelessWidget {
     //这个月中已完成的TODO
     var allDownListInMonth = allRecordInMonth.where((element) => element.isDone);
 
-    //这个月的完成率
-    var _monthProportion = allDownListInMonth.length / allRecordInMonth.length;
-
     return Container(
         margin: const EdgeInsets.only(left: 8),
         child: Column(

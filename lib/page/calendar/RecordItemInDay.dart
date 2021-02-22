@@ -10,29 +10,22 @@ class RecordItemInDay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        margin: EdgeInsets.only(top: 16),
-        child: Row(children: [
+        margin: EdgeInsets.only(top: 16, left: 16),
+        child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
           Container(
-              margin: EdgeInsets.all(8),
+              margin: EdgeInsets.only(left: 8,top: 12,right: 16),
               width: 6,
               height: 6,
               decoration: BoxDecoration(
-                  color: recordModel.isDone ? Colors.greenAccent : Colors.redAccent,
-                  shape: BoxShape.circle)),
-          SizedBox(
-            width: 1,
-            height: 24,
-            child: DecoratedBox(
-              decoration: BoxDecoration(color: Colors.black),
-            ),
-          ),
-          Container(
-            child: Text(
-              recordModel.content,
-              style: TextStyle(fontSize: 18),
-            ),
-            margin: EdgeInsets.only(left: 16),
-          )
+                  color: recordModel.isDone ? Colors.green : Colors.red, shape: BoxShape.circle)),
+          Expanded(
+              child: Text(
+            recordModel.content,
+            maxLines: 30,
+            style: TextStyle(fontSize: 18),
+          )),
         ]));
   }
 }

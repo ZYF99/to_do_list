@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:flutter/services.dart';
-import 'package:to_do_list/page/home/DailyListPage.dart';
 import 'package:to_do_list/page/main/MainPage.dart';
-import 'package:to_do_list/widget/CustomPaintRoute.dart';
 
 void main() => runApp(new MyApp());
 
